@@ -1,0 +1,15 @@
+[package]
+name = "ustx"
+version = "0.1.0"
+edition = "2024"
+description = "Rust data structures for OpenUtau .ustx project files."
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/stakira/OpenUtau"
+readme = "README.md"
+keywords = ["openutau", "ustx", "music", "yaml", "synth"]
+categories = ["encoding", "parser-implementations"]
+
+[dependencies]
+serde = { version = "1.0.228", features = ["derive"] }
+serde_yaml = "0.9.34"
+semver = { version = "1.0.23", features = ["serde"] }
