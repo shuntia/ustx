@@ -8,6 +8,8 @@ pub enum Error {
     Yaml(serde_yaml::Error),
     /// An error that occurred because the `.ustx` version is not supported.
     UnsupportedVersion(String),
+    /// An error that occurred because the YAML document is missing.
+    MissingDocument,
 }
 
 impl Display for Error {
@@ -18,6 +20,7 @@ impl Display for Error {
             Self::UnsupportedVersion(version) => {
                 write!(f, "unsupported ustx version: {version}")
             }
+            Self::MissingDocument => write!(f, "missing yaml document"),
         }
     }
 }
@@ -28,6 +31,7 @@ impl StdError for Error {
         match self {
             Self::Yaml(err) => Some(err),
             Self::UnsupportedVersion(_) => None,
+            Self::MissingDocument => None,
         }
     }
 }

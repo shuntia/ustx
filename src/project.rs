@@ -80,7 +80,10 @@ impl Project {
     /// Deserializes a `Project` from a YAML string.
     #[inline]
     pub fn from_yaml_str(input: &str) -> Result<Self, Error> {
-        serde_yaml::from_str(input).map_err(Error::from)
+        let mut documents = serde_yaml::Deserializer::from_str(input);
+        let document = documents.next().ok_or_else(|| Error::MissingDocument)?;
+        let project = Project::deserialize(document)?;
+        Ok(project)
     }
 
     /// Serializes a `Project` to a YAML string.
